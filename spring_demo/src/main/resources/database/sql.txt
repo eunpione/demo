@@ -1,0 +1,21 @@
+create database spring_board character set utf8mb4 collate utf8mb4_unicode_ci;
+
+use spring_board; 
+CREATE TABLE board (
+	id BIGINT auto_increment PRIMARY KEY,
+    title varchar(200) not null,
+    content text not null,
+    author varchar(100) not null,
+    created_date datetime default current_timestamp,
+    changed_date datetime default current_timestamp on update current_timestamp
+    );
+    
+    
+CREATE TABLE Users(
+	id BIGINT auto_increment PRIMARY KEY,
+    username varchar(50) not null unique,
+    password varchar(100) not null,
+    email varchar(100) not null unique,
+    role varchar(20) default 'user',
+    created_date datetime default current_timestamp
+    );
