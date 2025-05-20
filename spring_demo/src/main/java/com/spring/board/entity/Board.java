@@ -24,13 +24,14 @@ public class Board {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @Column(nullable = false, length = 100)
-    private String author;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false) //외래 키 지정(user_id로 DB에서 연결)
+    private User user;
 
     @Column(name = "created_date", updatable = false)
     private LocalDateTime createdDate;
-
     @Column(name = "changed_date")
+
     private LocalDateTime changedDate;
 
     @PrePersist

@@ -4,6 +4,10 @@
   <groupId>org.spring.demo</groupId>
   <artifactId>spring_demo</artifactId>
   <packaging>war</packaging>
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+  </properties>
   <version>1.0-SNAPSHOT</version>
   <name>spring_demo Maven Webapp</name>
   <url>http://maven.apache.org</url>

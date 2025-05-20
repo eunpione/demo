@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,6 +30,9 @@ public class User {
 
     @Column(length = 20)
     private String role = "user";
+
+    @OneToMany(mappedBy = "user")
+    private List<Board> boards;
 
     @Column(name = "created_date", updatable = false)
     private LocalDateTime createdDate;
