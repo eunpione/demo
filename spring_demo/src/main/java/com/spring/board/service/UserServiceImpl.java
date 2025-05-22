@@ -25,4 +25,10 @@ public class UserServiceImpl implements UserService{
         return UserDto.fromEntity(user);
     }
 
+    public UserDto getUserByUsername(String username){
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(()-> new IllegalArgumentException("사용자가 존재하지 않습니다. " + username));
+        return UserDto.fromEntity(user);
+    }
+
 }

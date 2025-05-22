@@ -24,11 +24,18 @@ public class UserController {
 
     }
 
-    //사용자 정보 조회
+    //사용자 정보 조회 By Id
     @GetMapping
     public ResponseEntity<UserDto> getUser(@RequestParam Long userId){
         UserDto getUser = userService.getUser(userId);
         return ResponseEntity.status(HttpStatus.OK).body(getUser);
+    }
+
+    //사용자 정보 조회 By UserName
+    @GetMapping
+    public ResponseEntity<UserDto> getUserByUsername(@RequestParam String username){
+        UserDto getUserByUsername = userService.getUserByUsername(username);
+        return ResponseEntity.status(HttpStatus.OK).body(getUserByUsername);
     }
     
     //사용자 정보 수정
