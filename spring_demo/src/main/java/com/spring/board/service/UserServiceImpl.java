@@ -31,4 +31,17 @@ public class UserServiceImpl implements UserService{
         return UserDto.fromEntity(user);
     }
 
+    public UserDto updateUser(UserRequestDto dto){
+        String userName = dto.getUsername();
+        User user = userRepository.findByUsername(userName)
+                .orElseThrow(()-> new IllegalArgumentException("수정하고자 하는 사용자가 존재하지 않습니다." + userName));
+
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
+
+        userRepository.save(user);
+
+        return UserDto.fromEntity(user);
+    }
+
 }

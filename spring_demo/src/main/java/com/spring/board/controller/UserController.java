@@ -39,4 +39,9 @@ public class UserController {
     }
     
     //사용자 정보 수정
+    @PutMapping
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserRequestDto userRequestDto){
+        UserDto updateOrNot = userService.updateUser(userRequestDto);
+        return ResponseEntity.status(HttpStatus.OK).body(updateOrNot);
+    }
 }
