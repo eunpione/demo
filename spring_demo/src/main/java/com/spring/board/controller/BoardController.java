@@ -31,13 +31,4 @@ public class BoardController {
     //게시글 수정
 
 
-
-
-    @GetMapping("/")
-    @ResponseBody
-    public String Board() {
-        System.out.println(">> BoardController 호출됨");
-        return "Hello, Spring!";
-    }
-
 }
