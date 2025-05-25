@@ -1,0 +1,52 @@
+package com.spring.board.controller;
+
+import com.spring.board.dto.BoardDto;
+import com.spring.board.dto.BoardRequestDto;
+import com.spring.board.service.BoardService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/boards")
+@RequiredArgsConstructor
+public class BoardController {
+
+    private final BoardService boardService;
+
+    //게시글 등록
+    @PostMapping
+    public ResponseEntity<BoardDto> createBoard(@RequestBody BoardRequestDto dto){
+        BoardDto createdBoard = boardService.createBoard(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdBoard);
+    }
+
+    @GetMapping
+    //게시글 조회
+    public ResponseEntity<BoardDto> getBoard(@RequestBody Long boardId){
+        BoardDto getBoard = boardService.getBoard(boardId);
+        return ResponseEntity.status(HttpStatus.OK).body(getBoard);
+    }
+
+
+    //게시글 삭제
+    @DeleteMapping
+    public ResponseEntity<String> deleteBoard(Long boardId){
+        int result = boardService.deleteBoard(boardId);
+        if(result == 1){
+            return ResponseEntity.status(HttpStatus.OK).body("게시글이 삭제되었습니다.");
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("삭제할 게시글이 존재하지 않습니다.");
+        }
+    }
+
+    @PostMapping
+    //게시글 수정
+    public ResponseEntity<BoardDto> updateBoard(@RequestBody BoardRequestDto boardRequestDto){
+        BoardDto updatedBoard = boardService.updateBoard(boardRequestDto);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedBoard);
+    }
+
+
+}
