@@ -22,13 +22,31 @@ public class BoardController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBoard);
     }
 
+    @GetMapping
     //게시글 조회
+    public ResponseEntity<BoardDto> getBoard(@RequestBody Long boardId){
+        BoardDto getBoard = boardService.getBoard(boardId);
+        return ResponseEntity.status(HttpStatus.OK).body(getBoard);
+    }
 
 
     //게시글 삭제
+    @DeleteMapping
+    public ResponseEntity<String> deleteBoard(Long boardId){
+        int result = boardService.deleteBoard(boardId);
+        if(result == 1){
+            return ResponseEntity.status(HttpStatus.OK).body("게시글이 삭제되었습니다.");
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("삭제할 게시글이 존재하지 않습니다.");
+        }
+    }
 
-
+    @PostMapping
     //게시글 수정
+    public ResponseEntity<BoardDto> updateBoard(@RequestBody BoardRequestDto boardRequestDto){
+        BoardDto updatedBoard = boardService.updateBoard(boardRequestDto);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedBoard);
+    }
 
 
 }

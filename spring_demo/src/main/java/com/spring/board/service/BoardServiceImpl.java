@@ -30,15 +30,36 @@ public class BoardServiceImpl implements BoardService{
     }
 
     public BoardDto getBoard(Long id){
-        return null;
+
+        Board board = boardRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("게시글이 존재하지 않습니다."));
+        return BoardDto.fromEntity(board);
     }
 
 
     public BoardDto updateBoard(BoardRequestDto dto){
-        return null;
+        Board board = boardRepository.findByTitleAndUserId(dto.getTitle(), dto.getUserId())
+                .orElseThrow(()-> new IllegalArgumentException("게시글이 존재하지 않습니다."));
+
+        board.setTitle(dto.getTitle());
+        board.setContent(dto.getContent());
+
+        boardRepository.save(board);
+
+        return BoardDto.fromEntity(board);
     }
 
     public int deleteBoard(Long id){
-        return 0;
+
+        try {
+            Board boardToDelete = boardRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("삭제하고자 하는 게시글이 존재하지 않습니다."));
+
+            boardRepository.delete(boardToDelete);
+            return 1;
+
+        }catch(IllegalArgumentException e){
+            return 0;
+        }
     }
 }
