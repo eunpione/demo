@@ -3,6 +3,7 @@ package com.spring.board.service;
 import com.spring.board.dto.UserDto;
 import com.spring.board.dto.UserRequestDto;
 import com.spring.board.entity.User;
+import com.spring.board.exception.UserNotFoundException;
 import com.spring.board.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,20 +22,20 @@ public class UserServiceImpl implements UserService{
 
     public UserDto getUser(Long id){
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("사용자가 존재하지 않습니다. " + id));
+                .orElseThrow(() -> new UserNotFoundException("사용자가 존재하지 않습니다. " + id));
         return UserDto.fromEntity(user);
     }
 
     public UserDto getUserByUsername(String username){
         User user = userRepository.findByUsername(username)
-                .orElseThrow(()-> new IllegalArgumentException("사용자가 존재하지 않습니다. " + username));
+                .orElseThrow(()-> new UserNotFoundException("사용자가 존재하지 않습니다. " + username));
         return UserDto.fromEntity(user);
     }
 
     public UserDto updateUser(UserRequestDto dto){
         String userName = dto.getUsername();
         User user = userRepository.findByUsername(userName)
-                .orElseThrow(()-> new IllegalArgumentException("수정하고자 하는 사용자가 존재하지 않습니다." + userName));
+                .orElseThrow(()-> new UserNotFoundException("수정하고자 하는 사용자가 존재하지 않습니다." + userName));
 
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
