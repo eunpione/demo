@@ -5,16 +5,21 @@ import com.spring.board.dto.UserRequestDto;
 import com.spring.board.entity.User;
 import com.spring.board.exception.UserNotFoundException;
 import com.spring.board.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository){ //누락
+        this.userRepository = userRepository;
+    }
+
 
     @Override
     public UserDto createUser(UserRequestDto dto){ //유저 등록(회원가입) 하고 나서 정상등록되었다는 차원에서 return

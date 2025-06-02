@@ -7,17 +7,22 @@ import com.spring.board.entity.Board;
 import com.spring.board.entity.User;
 import com.spring.board.repository.BoardRepository;
 import com.spring.board.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService{
 
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
+
+    @Autowired
+    public BoardServiceImpl(BoardRepository boardRepository, UserRepository userRepository){ //누락
+        this.boardRepository = boardRepository;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public BoardDto createBoard(BoardRequestDto dto){
@@ -40,7 +45,7 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public BoardDto updateBoard(BoardRequestDto dto){
-        Board board = boardRepository.findByTitleAndUserId(dto.getTitle(), dto.getUserId())
+        Board board = boardRepository.findByTitleAndUser_Id(dto.getTitle(), dto.getUserId())
                 .orElseThrow(()-> new IllegalArgumentException("게시글이 존재하지 않습니다."));
 
         board.setTitle(dto.getTitle());
