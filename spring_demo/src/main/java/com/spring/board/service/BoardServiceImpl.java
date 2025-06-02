@@ -9,15 +9,17 @@ import com.spring.board.repository.BoardRepository;
 import com.spring.board.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService{
-
 
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
 
+    @Override
     public BoardDto createBoard(BoardRequestDto dto){
 
         User author = userRepository.findById(dto.getUserId())
@@ -28,7 +30,7 @@ public class BoardServiceImpl implements BoardService{
 
         return BoardDto.fromEntity(savedBoard);
     }
-
+    @Override
     public BoardDto getBoard(Long id){
 
         Board board = boardRepository.findById(id)
@@ -36,7 +38,7 @@ public class BoardServiceImpl implements BoardService{
         return BoardDto.fromEntity(board);
     }
 
-
+    @Override
     public BoardDto updateBoard(BoardRequestDto dto){
         Board board = boardRepository.findByTitleAndUserId(dto.getTitle(), dto.getUserId())
                 .orElseThrow(()-> new IllegalArgumentException("게시글이 존재하지 않습니다."));
@@ -49,6 +51,7 @@ public class BoardServiceImpl implements BoardService{
         return BoardDto.fromEntity(board);
     }
 
+    @Override
     public int deleteBoard(Long id){
 
         try {

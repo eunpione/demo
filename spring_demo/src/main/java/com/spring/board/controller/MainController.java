@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class MainController {
 
-
-    @GetMapping("/")
+    @GetMapping
     public String main() {
         System.out.println(">> MainController 호출됨");
         return "Hello, Spring!";

@@ -3,17 +3,24 @@ package com.spring.board.controller;
 import com.spring.board.dto.BoardDto;
 import com.spring.board.dto.BoardRequestDto;
 import com.spring.board.service.BoardService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/boards")
-@RequiredArgsConstructor
 public class BoardController {
 
+    //private final BoardService boardService;
+    // 아래 직접 생성자 주입 방식 대신 위와 같이 final로 생성하고 
+    // RequiredArgsConstructor 어노테이션을 설정하여 자동 생성자 주입 가능
     private final BoardService boardService;
+
+    @Autowired
+    public BoardController(BoardService boardService){
+        this.boardService = boardService;
+    }
 
     //게시글 등록
     @PostMapping
@@ -41,7 +48,7 @@ public class BoardController {
         }
     }
 
-    @PostMapping
+    @PutMapping
     //게시글 수정
     public ResponseEntity<BoardDto> updateBoard(@RequestBody BoardRequestDto boardRequestDto){
         BoardDto updatedBoard = boardService.updateBoard(boardRequestDto);
