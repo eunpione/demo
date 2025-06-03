@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/boards")
+@RequestMapping("/eun")
 public class BoardController {
 
     //private final BoardService boardService;
@@ -23,23 +23,23 @@ public class BoardController {
     }
 
     //게시글 등록
-    @PostMapping
+    @PostMapping("/board")
     public ResponseEntity<BoardDto> createBoard(@RequestBody BoardRequestDto dto){
         BoardDto createdBoard = boardService.createBoard(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBoard);
     }
 
-    @GetMapping
+    @GetMapping("/board/{boardId}")
     //게시글 조회
-    public ResponseEntity<BoardDto> getBoard(@RequestBody Long boardId){
+    public ResponseEntity<BoardDto> getBoard(@PathVariable Long boardId){
         BoardDto getBoard = boardService.getBoard(boardId);
         return ResponseEntity.status(HttpStatus.OK).body(getBoard);
     }
 
 
     //게시글 삭제
-    @DeleteMapping
-    public ResponseEntity<String> deleteBoard(Long boardId){
+    @DeleteMapping("/board/{boardId}")
+    public ResponseEntity<String> deleteBoard(@PathVariable Long boardId){
         int result = boardService.deleteBoard(boardId);
         if(result == 1){
             return ResponseEntity.status(HttpStatus.OK).body("게시글이 삭제되었습니다.");
@@ -48,7 +48,7 @@ public class BoardController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/board")
     //게시글 수정
     public ResponseEntity<BoardDto> updateBoard(@RequestBody BoardRequestDto boardRequestDto){
         BoardDto updatedBoard = boardService.updateBoard(boardRequestDto);

@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/eun")
 public class UserController {
 
     private final UserService userService;
@@ -21,7 +21,7 @@ public class UserController {
     }
 
     //회원가입
-    @PostMapping
+    @PostMapping("/user")
     public ResponseEntity<UserDto> createUser(@RequestBody UserRequestDto userRequestDto) {
         UserDto createdUser = userService.createUser(userRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
@@ -29,21 +29,21 @@ public class UserController {
     }
 
     //사용자 정보 조회 By Id
-    @GetMapping
-    public ResponseEntity<UserDto> getUser(@RequestParam Long userId){
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<UserDto> getUser(@PathVariable Long userId){
         UserDto getUser = userService.getUser(userId);
         return ResponseEntity.status(HttpStatus.OK).body(getUser);
     }
 
     //사용자 정보 조회 By UserName
-    @GetMapping
-    public ResponseEntity<UserDto> getUserByUsername(@RequestParam String username){
+    @GetMapping("/user/{username}")
+    public ResponseEntity<UserDto> getUserByUsername(@PathVariable String username){
         UserDto getUserByUsername = userService.getUserByUsername(username);
         return ResponseEntity.status(HttpStatus.OK).body(getUserByUsername);
     }
     
     //사용자 정보 수정
-    @PutMapping
+    @PutMapping("/user")
     public ResponseEntity<UserDto> updateUser(@RequestBody UserRequestDto userRequestDto){
         UserDto updateOrNot = userService.updateUser(userRequestDto);
         return ResponseEntity.status(HttpStatus.OK).body(updateOrNot);
