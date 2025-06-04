@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/eun")
+@RequestMapping("/api")
 public class BoardController {
 
     //private final BoardService boardService;
