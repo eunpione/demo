@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+// @CrossOrigin(origins = "http://localhost:3000") // 모든 controller 설정하는 방식이라 비추천, CorsFilter로 처리
 public class UserController {
 
     private final UserService userService;

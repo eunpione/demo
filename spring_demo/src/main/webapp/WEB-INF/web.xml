@@ -4,10 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 
-
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> <!--누락-->
-  </listener>
+  <display-name>spring_demo</display-name>
 
   <context-param>
     <param-name>contextConfigLocation</param-name>
@@ -23,10 +20,22 @@
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
+  <filter>
+    <filter-name>corsFilter</filter-name>
+    <filter-class>com.spring.board.config.CorsFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>corsFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> <!--누락-->
+  </listener>
 
 </web-app>
