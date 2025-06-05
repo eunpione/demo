@@ -29,6 +29,9 @@ public class UserController {
 
     }
 
+    //로그인
+
+
     //사용자 정보 조회 By Id
     @GetMapping("/user/{userId}")
     public ResponseEntity<UserDto> getUser(@PathVariable Long userId){

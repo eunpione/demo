@@ -1,13 +1,9 @@
 package com.spring.board.config;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import javax.servlet.Filter;
 
 
 public class CorsFilter implements Filter {
@@ -33,6 +29,14 @@ public class CorsFilter implements Filter {
 
     }
 
+    @Override
+    public void init(FilterConfig filterConfig) {
 
+    }
+
+    @Override
+    public void destroy(){
+
+    }
 
 }
