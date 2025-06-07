@@ -1,6 +1,7 @@
 package com.spring.board.controller;
 
 
+import com.spring.board.dto.LoginRequestDto;
 import com.spring.board.dto.UserDto;
 import com.spring.board.dto.UserRequestDto;
 import com.spring.board.service.UserService;
@@ -28,8 +29,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
 
     }
-
-    //로그인
 
 
     //사용자 정보 조회 By Id

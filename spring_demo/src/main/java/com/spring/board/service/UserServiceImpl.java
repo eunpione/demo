@@ -1,5 +1,6 @@
 package com.spring.board.service;
 
+import com.spring.board.dto.LoginRequestDto;
 import com.spring.board.dto.UserDto;
 import com.spring.board.dto.UserRequestDto;
 import com.spring.board.entity.User;
@@ -26,6 +27,13 @@ public class UserServiceImpl implements UserService{
         User user = dto.toEntity();
         User savedUser = userRepository.save(user);
         return UserDto.fromEntity(savedUser);
+    }
+
+    @Override
+    public UserDto login(LoginRequestDto dto){
+        User user = userRepository.findByUsernameAndPassword(dto.getUsername(), dto.getPassword())
+                .orElseThrow(()-> new UserNotFoundException("아이디와 비밀번호를 확인해주세요"));
+        return UserDto.fromEntity(user);
     }
 
     @Override
