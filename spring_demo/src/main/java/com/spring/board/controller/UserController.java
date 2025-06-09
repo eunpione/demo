@@ -32,14 +32,14 @@ public class UserController {
 
 
     //사용자 정보 조회 By Id
-    @GetMapping("/user/{userId}")
+    @GetMapping("/user/id/{userId}")
     public ResponseEntity<UserDto> getUser(@PathVariable Long userId){
         UserDto getUser = userService.getUser(userId);
         return ResponseEntity.status(HttpStatus.OK).body(getUser);
     }
 
     //사용자 정보 조회 By UserName
-    @GetMapping("/user/{username}")
+    @GetMapping("/user/name/{username}")
     public ResponseEntity<UserDto> getUserByUsername(@PathVariable String username){
         UserDto getUserByUsername = userService.getUserByUsername(username);
         return ResponseEntity.status(HttpStatus.OK).body(getUserByUsername);
