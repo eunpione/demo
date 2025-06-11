@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -30,8 +29,8 @@ public class Board {
 
     @Column(name = "created_date", updatable = false)
     private LocalDateTime createdDate;
-    @Column(name = "changed_date")
 
+    @Column(name = "changed_date")
     private LocalDateTime changedDate;
 
     @PrePersist

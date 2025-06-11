@@ -22,6 +22,7 @@ public class BoardDto { //response용
         return BoardDto.builder()
                 .id(board.getId())
                 .title(board.getTitle())
+                .content(board.getContent())
                 .authorUsername(board.getUser().getUsername())
                 .createdDate(board.getCreatedDate().toString())
                 .changedDate(board.getChangedDate().toString())
