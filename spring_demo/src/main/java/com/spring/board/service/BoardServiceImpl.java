@@ -48,8 +48,8 @@ public class BoardServiceImpl implements BoardService{
         Board board = boardRepository.findByTitleAndUser_Id(dto.getTitle(), dto.getUserId())
                 .orElseThrow(()-> new IllegalArgumentException("게시글이 존재하지 않습니다."));
 
-        board.setTitle(dto.getTitle());
-        board.setContent(dto.getContent());
+//        board.setTitle(dto.getTitle()); //dto에서만 setter 사용함에 따라 코드 수정 필요
+//        board.setContent(dto.getContent());
 
         boardRepository.save(board);
 

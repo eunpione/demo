@@ -12,14 +12,28 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <context:component-scan base-package="com.spring.board.controller" />
+    <context:component-scan base-package="com.spring.board.service" />
+    <context:component-scan base-package="com.spring.board.repository" />
     <context:component-scan base-package="com.spring.board.config" />
 
     <mvc:annotation-driven/>
 
+    <bean id="boardController" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.spring.board.controller.BoardController" />
+    </bean>
+    <bean id="userController" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.spring.board.controller.UserController" />
+    </bean>
     <bean id="boardService" class="org.mockito.Mockito" factory-method="mock">
         <constructor-arg value="com.spring.board.service.BoardService" />
     </bean>
     <bean id="userService" class="org.mockito.Mockito" factory-method="mock">
         <constructor-arg value="com.spring.board.service.UserService" />
+    </bean>
+    <bean id="boardRepository" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.spring.board.repository.BoardRepository" />
+    </bean>
+    <bean id="userRepository" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.spring.board.repository.UserRepository" />
     </bean>
 </beans>

@@ -56,8 +56,8 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findByUsername(userName)
                 .orElseThrow(()-> new UserNotFoundException("수정하고자 하는 사용자가 존재하지 않습니다." + userName));
 
-        user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword());
+//        user.setEmail(dto.getEmail()); //dto에서만 set 가능함에 따라 수정 필요
+//        user.setPassword(dto.getPassword());
 
         userRepository.save(user);
 
