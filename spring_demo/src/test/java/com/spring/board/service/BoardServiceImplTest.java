@@ -21,13 +21,13 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class BoardServiceImplTest {
 
-    @InjectMocks
+    @InjectMocks //테스트 대상 클래스
     private BoardServiceImpl boardServiceimpl;
 
-    @Mock
+    @Mock //가짜 의존성 생성
     private UserRepository userRepository;
 
-    @Mock
+    @Mock //가짜 의존성 생성
     private BoardRepository boardRepository;
 
     @Test

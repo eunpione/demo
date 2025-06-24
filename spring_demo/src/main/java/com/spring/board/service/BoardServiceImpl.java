@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional
 public class BoardServiceImpl implements BoardService{
@@ -41,6 +44,20 @@ public class BoardServiceImpl implements BoardService{
         Board board = boardRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("게시글이 존재하지 않습니다."));
         return BoardDto.fromEntity(board);
+    }
+
+    @Override
+    public List<BoardDto> getAllBoard(){
+
+        List<Board> boards  = boardRepository.findAll();
+
+        if(boards.isEmpty()){
+            throw new IllegalArgumentException("작성된 게시글이 없습니다.");
+        }
+
+        return boards.stream()
+                .map(BoardDto::fromEntity)
+                .collect(Collectors.toList());
     }
 
     @Override
