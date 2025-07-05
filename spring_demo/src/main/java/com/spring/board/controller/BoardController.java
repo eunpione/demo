@@ -32,6 +32,7 @@ public class BoardController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBoard);
     }
 
+<<<<<<< HEAD
     //게시글 전체 조회
     @GetMapping("/board/")
     public ResponseEntity<List<BoardDto>> getAllBoards(){
@@ -40,12 +41,21 @@ public class BoardController {
     }
 
     @GetMapping("/board/{boardId}")
+=======
+>>>>>>> e3bfb009ff7cde1f4318b51e5b2de4c2014a7641
     //게시글 조회
+    @GetMapping("/board/{boardId}")
     public ResponseEntity<BoardDto> getBoard(@PathVariable Long boardId){
         BoardDto getBoard = boardService.getBoard(boardId);
         return ResponseEntity.status(HttpStatus.OK).body(getBoard);
     }
 
+    //게시글 전체 조회
+    @GetMapping("/boards")
+    public ResponseEntity<List<BoardDto>> getAllBoard(){
+        List<BoardDto> getAllBoard = boardService.getAllBoard();
+        return ResponseEntity.status(HttpStatus.OK).body(getAllBoard);
+    }
 
     //게시글 삭제
     @DeleteMapping("/board/{boardId}")
@@ -58,8 +68,8 @@ public class BoardController {
         }
     }
 
-    @PutMapping("/board")
     //게시글 수정
+    @PutMapping("/board")
     public ResponseEntity<BoardDto> updateBoard(@RequestBody BoardRequestDto boardRequestDto){
         BoardDto updatedBoard = boardService.updateBoard(boardRequestDto);
         return ResponseEntity.status(HttpStatus.OK).body(updatedBoard);
