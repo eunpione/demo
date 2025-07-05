@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -28,6 +30,13 @@ public class BoardController {
     public ResponseEntity<BoardDto> createBoard(@RequestBody BoardRequestDto dto){
         BoardDto createdBoard = boardService.createBoard(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBoard);
+    }
+
+    //게시글 전체 조회
+    @GetMapping("/board/")
+    public ResponseEntity<List<BoardDto>> getAllBoards(){
+        List<BoardDto> allBoards = boardService.getAllBoards();
+        return ResponseEntity.status(HttpStatus.OK).body(allBoards);
     }
 
     @GetMapping("/board/{boardId}")

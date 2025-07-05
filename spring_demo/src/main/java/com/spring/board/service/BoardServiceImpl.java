@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional
 public class BoardServiceImpl implements BoardService{
@@ -35,6 +39,14 @@ public class BoardServiceImpl implements BoardService{
 
         return BoardDto.fromEntity(savedBoard);
     }
+
+
+    public List<BoardDto> getAllBoards(){
+        List<Board> allBoards = boardRepository.findAll();
+//        return allBoards.stream().map(board -> BoardDto.fromEntity(board)).collect(Collectors.toList());
+        return allBoards.stream().map(BoardDto::fromEntity).collect(Collectors.toList());
+    }
+
     @Override
     public BoardDto getBoard(Long id){
 

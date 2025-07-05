@@ -10,8 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -76,6 +78,46 @@ class BoardServiceImplTest {
         assertEquals(mockUser.getUsername(), result.getAuthorUsername());
         verify(userRepository).findById(userId);
         verify(boardRepository).save(any(Board.class));
+
+    }
+
+    @Test
+    void getAllBoards(){
+        //given
+        List<Board> mockBoardList = List.of(
+                Board.builder()
+                        .id(1L)
+                        .user(User.builder().username("user1").build())
+                        .title("test1")
+                        .content("testC1")
+                        .createdDate(LocalDateTime.now())
+                        .build(),
+                Board.builder()
+                        .id(2L)
+                        .user(User.builder().username("user2").build())
+                        .title("test2")
+                        .content("testC2")
+                        .createdDate(LocalDateTime.now())
+                        .build()
+        );
+
+        when(boardRepository.findAll()).thenReturn(mockBoardList);
+
+        //when
+        List<BoardDto> result = boardServiceimpl.getAllBoards();
+
+        //then
+        assertNotNull(result);
+
+        assertEquals("test1", result.get(0).getTitle());
+        assertEquals("user1", result.get(0).getAuthorUsername());
+        assertEquals("testC1", result.get(0).getContent());
+
+        assertEquals("test2", result.get(1).getTitle());
+        assertEquals("user2", result.get(1).getAuthorUsername());
+        assertEquals("testC2", result.get(1).getContent());
+
+        verify(boardRepository).findAll(); // 실제 호출했는지 확인
 
     }
 
