@@ -40,7 +40,7 @@ public class BoardController {
     }
 
     //게시글 전체 조회
-    @GetMapping("/board/")
+    @GetMapping("/boards")
     public ResponseEntity<List<BoardDto>> getAllBoards(){
         List<BoardDto> allBoards = boardService.getAllBoards();
         return ResponseEntity.status(HttpStatus.OK).body(allBoards);

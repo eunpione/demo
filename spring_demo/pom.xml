@@ -108,11 +108,11 @@
       <artifactId>assertj-core</artifactId>
       <version>3.25.1</version> <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>com.h2database</groupId> <!--콘솔용?!-->
-      <artifactId>h2</artifactId>
-      <version>2.2.224</version> <scope>test</scope>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>com.h2database</groupId> &lt;!&ndash;콘솔용?!&ndash;&gt;-->
+<!--      <artifactId>h2</artifactId>-->
+<!--      <version>2.2.224</version> <scope>test</scope>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>

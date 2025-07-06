@@ -121,10 +121,43 @@ class BoardServiceImplTest {
 
     }
 
-//    @Test
-//    void getBoard() {
-//    }
-//
+    @Test
+    void getBoard() {
+
+        //given
+        List<Board> mockBoardList = List.of(
+                Board.builder()
+                        .id(1L)
+                        .user(User.builder().username("user1").build())
+                        .title("test1")
+                        .content("testC1")
+                        .createdDate(LocalDateTime.now())
+                        .build(),
+                Board.builder()
+                        .id(2L)
+                        .user(User.builder().username("user2").build())
+                        .title("test2")
+                        .content("testC2")
+                        .createdDate(LocalDateTime.now())
+                        .build()
+        );
+
+        Long boardId = 2L;
+
+        Board mockBoard = mockBoardList.get(1);
+        when(boardRepository.findById(boardId)).thenReturn(Optional.of(mockBoard));
+
+        //when
+        BoardDto result = boardServiceimpl.getBoard(boardId);
+
+        //then
+        assertNotNull(result);
+        assertEquals("test2", result.getTitle());
+        assertEquals("testC2", result.getContent());
+
+        verify(boardRepository).findById(boardId); // 실제 호출했는지 확인
+    }
+
 //    @Test
 //    void updateBoard() {
 //    }
