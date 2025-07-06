@@ -1,6 +1,7 @@
 package com.spring.board.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "board")
+@Where(clause = "delete_yn = false")
 public class Board {
 
     @Id

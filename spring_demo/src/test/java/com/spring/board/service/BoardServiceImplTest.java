@@ -17,8 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class BoardServiceImplTest {
@@ -162,8 +161,47 @@ class BoardServiceImplTest {
 //    void updateBoard() {
 //    }
 //
-//    @Test
-//    void deleteBoard() {
-//    }
+
+    @Test
+    void deleteBoard_success() {
+
+        //given
+        Long boardId = 1L;
+        Board boardToDelete = Board.builder()
+                .id(boardId)
+                .user(User.builder().username("user1").build())
+                .title("")
+                .content("content")
+                .createdDate(LocalDateTime.now())
+                .deleteYn(false)
+                .build();
+
+        when(boardRepository.findById(boardId)).thenReturn(Optional.of(boardToDelete));
+
+        //when
+        int result = boardServiceimpl.deleteBoard(boardId);
+
+        //then
+        assertEquals(1,result);
+        verify(boardRepository).findById(boardId);
+        verify(boardRepository).updateBoardByDeleteYn(boardId);
+    }
+
+    @Test
+    void deleteBoard_failure() {
+
+        //given
+        Long boardId = 2L;
+
+        when(boardRepository.findById(boardId)).thenReturn(Optional.empty());
+
+        //when
+        int result = boardServiceimpl.deleteBoard(boardId);
+
+        //then
+        assertEquals(0,result);
+        verify(boardRepository).findById(boardId);
+        verify(boardRepository, never()).updateBoardByDeleteYn(any());
+    }
 
 }

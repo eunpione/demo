@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -76,16 +77,15 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
+    @Transactional
     public int deleteBoard(Long id){
 
-        try {
-            Board boardToDelete = boardRepository.findById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("삭제하고자 하는 게시글이 존재하지 않습니다."));
+        Optional<Board> BoardToDelete = boardRepository.findById(id);
 
-            boardRepository.delete(boardToDelete);
+        if (BoardToDelete.isPresent()) {
+            boardRepository.updateBoardByDeleteYn(id);  // deleteYn = true
             return 1;
-
-        }catch(IllegalArgumentException e){
+        } else {
             return 0;
         }
     }
