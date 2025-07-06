@@ -33,6 +33,9 @@ public class Board {
     @Column(name = "changed_date")
     private LocalDateTime changedDate;
 
+    @Column(name = "delete_yn", nullable = false)
+    private boolean deleteYn;
+
     @PrePersist
     protected void onCreate(){
         this.createdDate = LocalDateTime.now();

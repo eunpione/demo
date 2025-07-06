@@ -16,10 +16,9 @@ import java.util.List;
 
 public class BoardController {
 
-    //private final BoardService boardService;
+    private final BoardService boardService;
     // 아래 직접 생성자 주입 방식 대신 위와 같이 final로 생성하고 
     // RequiredArgsConstructor 어노테이션을 설정하여 자동 생성자 주입 가능
-    private final BoardService boardService;
 
 //    public BoardController(BoardService boardService){
 //        this.boardService = boardService;

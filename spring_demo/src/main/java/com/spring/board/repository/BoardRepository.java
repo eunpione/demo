@@ -8,4 +8,5 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     Optional<Board> findByTitle(String searchStr);
     Optional<Board> findByTitleAndUser_Id(String title, Long userId);
+
 }
