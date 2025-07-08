@@ -91,7 +91,7 @@
       <groupId>com.querydsl</groupId>
       <artifactId>querydsl-apt</artifactId>
       <version>${querydsl.version}</version>
-      <scope>provided</scope>
+      <classifier>jpa</classifier>
     </dependency>
 
 
@@ -164,6 +164,7 @@
               <groupId>com.querydsl</groupId>
               <artifactId>querydsl-apt</artifactId>
               <version>${querydsl.version}</version>
+              <classifier>jpa</classifier>
             </path>
             <path>
               <groupId>org.projectlombok</groupId>
@@ -176,6 +177,9 @@
               <version>1.3.2</version>
             </path>
           </annotationProcessorPaths>
+          <generatedSourcesDirectory>
+            ${project.build.directory}/generated-sources/annotations
+          </generatedSourcesDirectory>
         </configuration>
       </plugin>
     </plugins>
