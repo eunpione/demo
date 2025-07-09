@@ -49,19 +49,19 @@ public class Board {
         this.changedDate = LocalDateTime.now();
     }
 
-    // 객체가 스스로 책임을 갖도록
-    public void update(String newTitle, String newContent){
-        
-        if (newTitle == null || newTitle.trim().isEmpty()){
-            throw new IllegalArgumentException("게시글 제목 필수 작성");
-        }
-        
-        if (newTitle.length() > 100){
-            throw new IllegalArgumentException("게시글 제목은 100자를 초과할 수 없음");
-        }
-        this.title = newTitle;
-        this.content = newContent;
-    }
+    // 객체가 스스로 책임을 갖도록 하려고 했는데 => 엥 Entity는 DB 접근시에만 쓰려고 한건데 왜 서비스 단에서 쓰고 있지?
+//    public void update(String newTitle, String newContent){
+//
+//        if (newTitle == null || newTitle.trim().isEmpty()){
+//            throw new IllegalArgumentException("게시글 제목 필수 작성");
+//        }
+//
+//        if (newTitle.length() > 100){
+//            throw new IllegalArgumentException("게시글 제목은 100자를 초과할 수 없음");
+//        }
+//        this.title = newTitle;
+//        this.content = newContent;
+//    }
 
 
 
