@@ -59,8 +59,8 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public BoardDto updateBoard(BoardRequestDto dto){
-        Board board = boardRepository.findByTitleAndUser_Id(dto.getTitle(), dto.getUserId())
+    public BoardDto updateBoard(BoardDto dto){
+        Board board = boardRepository.findByTitleAndUser_Id(dto.getTitle(), dto.getId())
                 .orElseThrow(()-> new IllegalArgumentException("게시글이 존재하지 않습니다."));
 
 //        board.setTitle(dto.getTitle()); //dto에서만 setter 사용함에 따라 코드 수정 필요
@@ -73,7 +73,13 @@ public class BoardServiceImpl implements BoardService{
 //            throw new RuntimeException("게시글 수정 실패: "+ e.getMessage());
 //        }catch (Exception e) {
 //            throw new RuntimeException("알 수 없는 오류로 게시글 수정 실패", e);
-//        }
+
+
+        long count = boardRepository.updateTitleAndContent(dto);
+        if (count != 1) {
+            throw new IllegalArgumentException("게시글 수정에 실패했습니다. id=" + dto.getId());
+        }
+
         return null;
     }
 

@@ -10,6 +10,6 @@ public interface BoardService {
     List<BoardDto> getAllBoards();
     BoardDto createBoard(BoardRequestDto dto);
     BoardDto getBoard(Long id);
-    BoardDto updateBoard(BoardRequestDto dto);
+    BoardDto updateBoard(BoardDto dto);
     int deleteBoard(Long id);
 }
