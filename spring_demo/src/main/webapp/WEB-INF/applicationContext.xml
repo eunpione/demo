@@ -53,4 +53,15 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
+    <bean id="entityManager"
+          class="org.springframework.orm.jpa.SharedEntityManagerCreator"
+          factory-method="createSharedEntityManager">
+        <constructor-arg ref="entityManagerFactory"/>
+    </bean>
+
+    <bean id="jpaQueryFactory"
+          class="com.querydsl.jpa.impl.JPAQueryFactory">
+        <constructor-arg ref="entityManager"/>
+    </bean>
+
 </beans>

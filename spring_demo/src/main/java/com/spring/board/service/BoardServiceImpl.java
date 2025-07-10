@@ -66,14 +66,15 @@ public class BoardServiceImpl implements BoardService{
 //        board.setTitle(dto.getTitle()); //dto에서만 setter 사용함에 따라 코드 수정 필요
 //        board.setContent(dto.getContent());
 
-        try{
-            board.update(dto.getTitle(), dto.getContent());
-            return BoardDto.fromEntity(board);
-        }catch(IllegalArgumentException e){
-            throw new RuntimeException("게시글 수정 실패: "+ e.getMessage());
-        }catch (Exception e) {
-            throw new RuntimeException("알 수 없는 오류로 게시글 수정 실패", e);
-        }
+//        try{
+//            board.update(dto.getTitle(), dto.getContent());
+//            return BoardDto.fromEntity(board);
+//        }catch(IllegalArgumentException e){
+//            throw new RuntimeException("게시글 수정 실패: "+ e.getMessage());
+//        }catch (Exception e) {
+//            throw new RuntimeException("알 수 없는 오류로 게시글 수정 실패", e);
+//        }
+        return null;
     }
 
     @Override
