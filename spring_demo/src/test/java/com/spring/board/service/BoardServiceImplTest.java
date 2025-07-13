@@ -8,6 +8,7 @@ import com.spring.board.repository.BoardRepository;
 import com.spring.board.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -157,10 +158,47 @@ class BoardServiceImplTest {
         verify(boardRepository).findById(boardId); // 실제 호출했는지 확인
     }
 
-//    @Test
-//    void updateBoard() {
-//    }
-//
+    @Test
+    void updateBoard() {
+
+        // given
+        Long boardId = 1L;
+        Long userId = 2L;
+
+        Board board = Board.builder()
+                .id(boardId)
+                .user(User.builder().id(userId).username("user1").build())
+                .title("기존 제목")
+                .content("기존 내용")
+                .createdDate(LocalDateTime.now())
+                .deleteYn(false)
+                .build();
+
+        when(boardRepository.findById(boardId)).thenReturn(Optional.of(board));
+
+        BoardDto updateDto = BoardDto.builder()
+                .id(boardId)
+                .authorUsername("user1")
+                .title("수정 제목")
+                .content("수정 내용")
+                .changedDate(LocalDateTime.now().toString())
+                .build();
+
+        when(boardRepository.updateTitleAndContent(any(BoardDto.class))).thenReturn(1L);
+
+        // when
+        boardServiceimpl.updateBoard(updateDto);
+
+        // then
+        ArgumentCaptor<BoardDto> captor = ArgumentCaptor.forClass(BoardDto.class);
+        verify(boardRepository).updateTitleAndContent(captor.capture());
+
+        BoardDto actual = captor.getValue();
+        assertEquals("수정 제목", actual.getTitle());
+        assertEquals("수정 내용", actual.getContent());
+        assertEquals(boardId, actual.getId());
+    }
+
 
     @Test
     void deleteBoard_success() {
@@ -170,7 +208,7 @@ class BoardServiceImplTest {
         Board boardToDelete = Board.builder()
                 .id(boardId)
                 .user(User.builder().username("user1").build())
-                .title("")
+                .title("title")
                 .content("content")
                 .createdDate(LocalDateTime.now())
                 .deleteYn(false)

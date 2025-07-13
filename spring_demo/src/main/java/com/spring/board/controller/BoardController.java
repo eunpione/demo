@@ -58,9 +58,9 @@ public class BoardController {
 
     //게시글 수정
     @PutMapping("/board")
-    public ResponseEntity<BoardDto> updateBoard(@RequestBody BoardDto boardDto){
-        BoardDto updatedBoard = boardService.updateBoard(boardDto);
-        return ResponseEntity.status(HttpStatus.OK).body(updatedBoard);
+    public ResponseEntity<Void> updateBoard(@RequestBody BoardDto boardDto) {
+        boardService.updateBoard(boardDto);
+        return ResponseEntity.ok().build(); // 또는 ResponseEntity.status(HttpStatus.OK).build();
     }
 
 

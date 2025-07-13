@@ -59,13 +59,27 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public BoardDto updateBoard(BoardDto dto){
-        Board board = boardRepository.findByTitleAndUser_Id(dto.getTitle(), dto.getId())
+    public void updateBoard(BoardDto dto){
+        Board board = boardRepository.findById(dto.getId())
                 .orElseThrow(()-> new IllegalArgumentException("게시글이 존재하지 않습니다."));
 
+//        [공유3] 작성자와 로그인 사용자 동일 여부 검증 방식은 클라이언트에서 바로 받는 것이 부적절
+
+//        Optional<User> authorUser = userRepository.findByUsername(dto.getAuthorUsername());
+//
+//        if(authorUser.isPresent() && !authorUser.get().getId().equals(loginUserId)){
+//            throw new IllegalArgumentException("게시글 작성자가 아닙니다.");
+//        }
+
+        BoardDto dtoToUpdate = BoardDto.fromEntity(board);
+        dtoToUpdate.setTitle(dto.getTitle());
+        dtoToUpdate.setContent(dto.getContent());
+
+//        [공유1] Setter의 제한적 사용
 //        board.setTitle(dto.getTitle()); //dto에서만 setter 사용함에 따라 코드 수정 필요
 //        board.setContent(dto.getContent());
 
+//        [공유2] 객체지향적 코드 -> 객체에서 책임지도록 하려다가 이슈 발생
 //        try{
 //            board.update(dto.getTitle(), dto.getContent());
 //            return BoardDto.fromEntity(board);
@@ -75,12 +89,11 @@ public class BoardServiceImpl implements BoardService{
 //            throw new RuntimeException("알 수 없는 오류로 게시글 수정 실패", e);
 
 
-        long count = boardRepository.updateTitleAndContent(dto);
+        long count = boardRepository.updateTitleAndContent(dtoToUpdate);
         if (count != 1) {
             throw new IllegalArgumentException("게시글 수정에 실패했습니다. id=" + dto.getId());
         }
 
-        return null;
     }
 
     @Override

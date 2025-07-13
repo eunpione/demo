@@ -13,6 +13,5 @@ public interface BoardRepository extends JpaRepository<Board, Long>, BoardReposi
     @Modifying
     @Query("UPDATE Board b SET b.deleteYn = true WHERE b.id = :boardId")
     void updateBoardByDeleteYn(@Param("boardId") Long boardId);
-    Optional<Board> findByTitleAndUser_Id(String title, Long userId);
 
 }

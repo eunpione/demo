@@ -41,9 +41,4 @@ public class User {
         this.createdDate = LocalDateTime.now();
     }
 
-
-    public void update(String newEmail, String newPassword){
-        this.email = newEmail;
-        this.password = newPassword;
-    }
 }

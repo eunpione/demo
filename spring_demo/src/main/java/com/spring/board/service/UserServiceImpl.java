@@ -59,13 +59,14 @@ public class UserServiceImpl implements UserService{
 //        user.setEmail(dto.getEmail()); //dto에서만 set 가능함에 따라 수정 필요
 //        user.setPassword(dto.getPassword());
 
-        try{
-            user.update(dto.getEmail(), dto.getPassword());
-            return UserDto.fromEntity(user);
-        }catch(IllegalArgumentException e){
-            throw new RuntimeException("회원 정보 수정 실패: "+ e.getMessage());
-        }catch (Exception e){
-            throw new RuntimeException("알 수 없는 오류로 회원정보 변경 실패", e);
-        }
+//        try{
+//            user.update(dto.getEmail(), dto.getPassword());
+//            return UserDto.fromEntity(user);
+//        }catch(IllegalArgumentException e){
+//            throw new RuntimeException("회원 정보 수정 실패: "+ e.getMessage());
+//        }catch (Exception e){
+//            throw new RuntimeException("알 수 없는 오류로 회원정보 변경 실패", e);
+
+        return null;
     }
 }
